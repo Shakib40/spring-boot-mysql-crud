@@ -12,6 +12,6 @@ public class BasiCrudApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BasiCrudApplication.class, args);
-        System.out.println(ANSI_GREEN + "✅ Basi-Crud Application is running at http://localhost:8080" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "✅ Application is running at http://localhost:8080" + ANSI_RESET);
     }
 }
