@@ -1,9 +1,10 @@
 package com.crud.dto;
+import java.time.LocalDateTime;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import jakarta.validation.constraints.*;
+ 
 
 public class BookDto {
     private Long id;
@@ -18,9 +19,12 @@ public class BookDto {
 
     @NotNull(message = "Price is mandatory")
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
-    private Double price;  
+    private Double price;
     
     
+    @LastModifiedDate
+    private LocalDateTime publishDate;
+   
     
     public BookDto() {}
 
@@ -30,6 +34,7 @@ public class BookDto {
         this.title = book.getTitle();
         this.author = book.getAuthor();
         this.price = book.getPrice();
+        this.publishDate = LocalDateTime.now();
     }
     
     // Getters
@@ -48,7 +53,7 @@ public class BookDto {
     public Double getPrice() {
         return price;
     }
-
+    
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -65,4 +70,6 @@ public class BookDto {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+ 
 }

@@ -1,9 +1,16 @@
 package com.crud.entity;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "books")
+@EntityListeners(AuditingEntityListener.class)
 public class Book {
 
     @Id
@@ -13,6 +20,15 @@ public class Book {
     private String title;
     private String author;
     private double price;
+    
+    private LocalDateTime publishDate;
+
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
     
     
     public Book() {
@@ -24,6 +40,9 @@ public class Book {
         this.title = dto.getTitle();
         this.author = dto.getAuthor();
         this.price = dto.getPrice();
+        this.publishDate = LocalDateTime.now(); // Default to now
+        this.createdDate = LocalDateTime.now();
+        this.updatedDate = LocalDateTime.now();
     }
 
     // Getters and Setters
@@ -58,4 +77,12 @@ public class Book {
     public void setPrice(double price) {
         this.price = price;
     }
+
+	public LocalDateTime getPublishDate() {
+		return publishDate;
+	}
+
+	public void setPublishDate(LocalDateTime publishDate) {
+		this.publishDate = publishDate;
+	}
 }
