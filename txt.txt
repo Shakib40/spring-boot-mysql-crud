@@ -1,1 +1,48 @@
-	
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+✅ String Field Validations
+| Annotation          | Description                                                             |
+| ------------------- | ----------------------------------------------------------------------- |
+| `@NotBlank`         | Ensures the string is **not null and not empty** after trimming.        |
+| `@NotEmpty`         | Ensures the string/collection is not null or empty.                     |
+| `@Size(min=, max=)` | Sets minimum and/or maximum length of a string, collection, or array.   |
+| `@Pattern(regexp=)` | Validates string against a regex pattern. Useful for email, phone, etc. |
+| `@Email`            | Validates that a string is a well-formed email address.                 |
+
+
+
+🔢 Number Field Validations
+| Annotation                   | Description                                                             |
+| ---------------------------- | ----------------------------------------------------------------------- |
+| `@Min(value)`                | Sets minimum allowed value (inclusive).                                 |
+| `@Max(value)`                | Sets maximum allowed value (inclusive).                                 |
+| `@Positive`                  | Validates number is > 0.                                                |
+| `@PositiveOrZero`            | Validates number is >= 0.                                               |
+| `@Negative`                  | Validates number is < 0.                                                |
+| `@NegativeOrZero`            | Validates number is <= 0.                                               |
+| `@Digits(integer, fraction)` | Specifies the number of digits allowed in integer and fractional parts. |
+| `@DecimalMin(value)`         | For `BigDecimal`/`double`, enforces minimum decimal value.              |
+| `@DecimalMax(value)`         | Same as above, but for maximum.                                         |
+
+
+
+🧍 Object and Nullability
+| Annotation     | Description                                                                 |
+| -------------- | --------------------------------------------------------------------------- |
+| `@NotNull`     | Ensures the field is not null.                                              |
+| `@Null`        | Ensures the field must be null (rarely used, e.g., for auto-generated IDs). |
+| `@AssertTrue`  | Ensures the value is `true`. Often used for terms/conditions, booleans.     |
+| `@AssertFalse` | Ensures the value is `false`.                                               |
+
+
+
+📆 Date/Time Validations (Java 8+)
+| Annotation         | Description                          |
+| ------------------ | ------------------------------------ |
+| `@Past`            | Validates the date is in the past.   |
+| `@PastOrPresent`   | Date must be in the past or today.   |
+| `@Future`          | Validates the date is in the future. |
+| `@FutureOrPresent` | Date must be in the future or today. |

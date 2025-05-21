@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/books")
@@ -15,7 +16,7 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    public BookDto createBook(@RequestBody BookDto bookDto) {
+    public BookDto createBook(@Valid @RequestBody BookDto bookDto) {
         return bookService.createBook(bookDto);
     }
 

@@ -13,6 +13,18 @@ public class Book {
     private String title;
     private String author;
     private double price;
+    
+    
+    public Book() {
+    }
+
+    // Constructor to convert DTO to Entity
+    public Book(com.crud.dto.BookDto dto) {
+        this.id = dto.getId();
+        this.title = dto.getTitle();
+        this.author = dto.getAuthor();
+        this.price = dto.getPrice();
+    }
 
     // Getters and Setters
     public Long getId() {

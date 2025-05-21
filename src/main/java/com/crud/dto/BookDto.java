@@ -1,11 +1,37 @@
 package com.crud.dto;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class BookDto {
     private Long id;
-    private String title;
-    private String author;
-    private double price;
 
+    @NotBlank(message = "Title is mandatory")
+    @Size(min = 1, max = 255, message = "Title must be between 1 and 255 characters")
+    private String title;
+
+    @NotBlank(message = "Author is mandatory")
+    @Size(min = 1, max = 255, message = "Author must be between 1 and 255 characters")
+    private String author;
+
+    @NotNull(message = "Price is mandatory")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
+    private Double price;  
+    
+    
+    
+    public BookDto() {}
+
+    // Constructor to convert Entity -> DTO
+    public BookDto(com.crud.entity.Book book) {
+        this.id = book.getId();
+        this.title = book.getTitle();
+        this.author = book.getAuthor();
+        this.price = book.getPrice();
+    }
+    
     // Getters
     public Long getId() {
         return id;
@@ -19,7 +45,7 @@ public class BookDto {
         return author;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -36,7 +62,7 @@ public class BookDto {
         this.author = author;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }
