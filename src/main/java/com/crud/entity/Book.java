@@ -20,7 +20,6 @@ public class Book {
     private String title;
     private String author;
     private double price;
-    
     private LocalDateTime publishDate;
 
     @CreatedDate
@@ -35,16 +34,15 @@ public class Book {
     }
 
     // Constructor to convert DTO to Entity
-    public Book(com.crud.dto.BookDto dto) {
-        this.id = dto.getId();
-        this.title = dto.getTitle();
-        this.author = dto.getAuthor();
-        this.price = dto.getPrice();
-        this.publishDate = LocalDateTime.now(); // Default to now
-        this.createdDate = LocalDateTime.now();
-        this.updatedDate = LocalDateTime.now();
+    public Book(String title, String author, double price, LocalDateTime publishDate) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.publishDate = publishDate;
     }
-
+    
+    
+   
     // Getters and Setters
     public Long getId() {
         return id;
@@ -85,4 +83,12 @@ public class Book {
 	public void setPublishDate(LocalDateTime publishDate) {
 		this.publishDate = publishDate;
 	}
+	
+	public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public LocalDateTime getUpdatedDate() {
+        return updatedDate;
+    }
 }

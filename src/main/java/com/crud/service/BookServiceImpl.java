@@ -1,7 +1,8 @@
 package com.crud.service;
 
-import com.crud.dto.BookDto;
+import com.crud.dto.*;
 import com.crud.entity.Book;
+import com.crud.exception.ResourceNotFoundException;
 import com.crud.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,42 +17,51 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     @Override
-    public BookDto createBook(BookDto bookDto) {
-        Book book = new Book(bookDto);             // convert DTO to Entity
+    public CreateBookDto createBook(CreateBookDto createBookDto) {
+        Book book = new Book();
+        book.setTitle(createBookDto.getTitle());
+        book.setAuthor(createBookDto.getAuthor());
+        book.setPrice(createBookDto.getPrice());
+        book.setPublishDate(createBookDto.getPublishDate());
+
         Book savedBook = bookRepository.save(book);
-        return new BookDto(savedBook);             // convert Entity to DTO
+        return new CreateBookDto(savedBook);
     }
 
     @Override
-    public List<BookDto> getAllBooks() {
+    public List<ListBookDto> getAllBooks() {
         return bookRepository.findAll()
                 .stream()
-                .map(BookDto::new)                // constructor-based conversion
+                .map(ListBookDto::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public BookDto getBookById(Long id) {
-        return bookRepository.findById(id)
-                .map(BookDto::new)
-                .orElse(null);
+    public CreateBookDto getBookById(Long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found with id: " + id));
+        return new CreateBookDto(book);
     }
 
     @Override
-    public BookDto updateBook(Long id, BookDto bookDto) {
-        return bookRepository.findById(id)
-                .map(existing -> {
-                    existing.setTitle(bookDto.getTitle());
-                    existing.setAuthor(bookDto.getAuthor());
-                    existing.setPrice(bookDto.getPrice());
-                    Book updated = bookRepository.save(existing);
-                    return new BookDto(updated);
-                })
-                .orElse(null);
+    public CreateBookDto updateBook(Long id, CreateBookDto bookDto) {
+        Book existing = bookRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found with id: " + id));
+
+        existing.setTitle(bookDto.getTitle());
+        existing.setAuthor(bookDto.getAuthor());
+        existing.setPrice(bookDto.getPrice());
+        existing.setPublishDate(bookDto.getPublishDate());
+
+        Book updated = bookRepository.save(existing);
+        return new CreateBookDto(updated);
     }
 
     @Override
     public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+        Book existing = bookRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found with id: " + id));
+
+        bookRepository.delete(existing);
     }
 }

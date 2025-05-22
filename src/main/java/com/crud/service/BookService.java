@@ -1,11 +1,12 @@
 package com.crud.service;
-import com.crud.dto.BookDto;
+import com.crud.dto.*;
 import java.util.List;
 
+
 public interface BookService {
-    BookDto createBook(BookDto bookDto);
-    List<BookDto> getAllBooks();
-    BookDto getBookById(Long id);
-    BookDto updateBook(Long id, BookDto bookDto);
+	CreateBookDto createBook(CreateBookDto createBookDto);
+    List<ListBookDto> getAllBooks();
+    CreateBookDto getBookById(Long id);
+    CreateBookDto updateBook(Long id, CreateBookDto createBookDto);
     void deleteBook(Long id);
 }

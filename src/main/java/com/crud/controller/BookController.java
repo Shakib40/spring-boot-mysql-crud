@@ -1,12 +1,14 @@
 package com.crud.controller;
 
-import com.crud.dto.BookDto;
+import com.crud.dto.*;
 import com.crud.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/books")
@@ -16,23 +18,23 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    public BookDto createBook(@Valid @RequestBody BookDto bookDto) {
-        return bookService.createBook(bookDto);
+    public CreateBookDto createBook(@Valid @RequestBody CreateBookDto createBookDto) {
+        return bookService.createBook(createBookDto);
     }
 
     @GetMapping
-    public List<BookDto> getAllBooks() {
+    public List<ListBookDto> getAllBooks() {
         return bookService.getAllBooks();
     }
 
     @GetMapping("/{id}")
-    public BookDto getBookById(@PathVariable Long id) {
+    public CreateBookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
     @PutMapping("/{id}")
-    public BookDto updateBook(@PathVariable Long id, @RequestBody BookDto bookDto) {
-        return bookService.updateBook(id, bookDto);
+    public CreateBookDto updateBook(@PathVariable Long id, @RequestBody CreateBookDto createBookDto) {
+        return bookService.updateBook(id, createBookDto);
     }
 
     @DeleteMapping("/{id}")

@@ -2,8 +2,10 @@ package com.crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing // For Auto Update
 public class BasiCrudApplication {
 
     // ANSI escape code for green color

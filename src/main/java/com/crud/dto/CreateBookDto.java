@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.validation.constraints.*;
- 
+import com.crud.entity.Book;
 
-public class BookDto {
+public class CreateBookDto {
     private Long id;
 
     @NotBlank(message = "Title is mandatory")
@@ -26,17 +26,19 @@ public class BookDto {
     private LocalDateTime publishDate;
    
     
-    public BookDto() {}
-
-    // Constructor to convert Entity -> DTO
-    public BookDto(com.crud.entity.Book book) {
+    public CreateBookDto() {}
+ // DTO constructor from Entity
+    public CreateBookDto(Book book) {
         this.id = book.getId();
         this.title = book.getTitle();
         this.author = book.getAuthor();
         this.price = book.getPrice();
-        this.publishDate = LocalDateTime.now();
+        this.publishDate = book.getPublishDate();
     }
     
+ 
+    
+
     // Getters
     public Long getId() {
         return id;
@@ -70,6 +72,13 @@ public class BookDto {
     public void setPrice(Double price) {
         this.price = price;
     }
+   
+	public LocalDateTime getPublishDate() {
+		return publishDate;
+	}
 
+	public void setPublishDate(LocalDateTime publishDate) {
+		this.publishDate = publishDate;
+	}
  
 }
