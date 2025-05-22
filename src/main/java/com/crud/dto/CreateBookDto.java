@@ -1,28 +1,25 @@
 package com.crud.dto;
 import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.LastModifiedDate;
-
 import jakarta.validation.constraints.*;
 import com.crud.entity.Book;
 
 public class CreateBookDto {
     private Long id;
 
-    @NotBlank(message = "Title is mandatory")
-    @Size(min = 1, max = 255, message = "Title must be between 1 and 255 characters")
+    @NotBlank(message = "Title is required")
+    @Size(min = 2, max = 100, message = "Title must be between 2 and 100 characters")
     private String title;
 
-    @NotBlank(message = "Author is mandatory")
-    @Size(min = 1, max = 255, message = "Author must be between 1 and 255 characters")
+    @NotBlank(message = "Author is required")
+    @Size(min = 2, max = 50, message = "Author name must be between 2 and 50 characters")
     private String author;
+    
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be greater than zero")
+    private double price;
 
-    @NotNull(message = "Price is mandatory")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
-    private Double price;
-    
-    
-    @LastModifiedDate
+    @NotNull(message = "Publish date is required")
+    @PastOrPresent(message = "Publish date can't be in the future")
     private LocalDateTime publishDate;
    
     
