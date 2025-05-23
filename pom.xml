@@ -63,7 +63,7 @@
 		</dependency>
 		
 		 
-		 <!-- Bean Validation API -->
+		 <!-- START Validation API -->
          <dependency>
              <groupId>jakarta.validation</groupId>
              <artifactId>jakarta.validation-api</artifactId>
@@ -73,6 +73,14 @@
           <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-starter-validation</artifactId>
+           </dependency>
+           
+           <!-- END Validation API -->
+           
+           <dependency>
+               <groupId>org.springdoc</groupId>
+               <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+               <version>2.3.0</version> <!-- SWAGGER -->
            </dependency>
 		
 	</dependencies>
